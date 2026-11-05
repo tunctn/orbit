@@ -2,6 +2,12 @@ import { createContext, useContext } from 'react'
 
 export type Theme = 'dark' | 'light'
 
+/** Account settings → Appearance → Font. `noto-sans` is the default; `system` is the operating system's UI font. */
+export const FONTS = ['noto-sans', 'geist', 'inter', 'ibm-plex-sans', 'system', 'literata', 'mono'] as const
+
+/** Account settings → Appearance → Text size, smallest first. */
+export const TEXT_SIZES = ['small', 'compact', 'default', 'large', 'extra-large'] as const
+
 /** The Account settings → Appearance choices, saved in this browser. */
 export interface Appearance {
   /** `system` follows the operating system. */
@@ -15,6 +21,10 @@ export interface Appearance {
    * colours the whole app. `classic` keeps the sidebar with the app links only, and a custom theme that colours chat.
    */
   layout: 'classic' | 'new'
+  /** The typeface of the whole interface (`[data-font]` on `<html>`). */
+  font: (typeof FONTS)[number]
+  /** The root font size: every rem size, text and spacing, follows it (`[data-text-size]` on `<html>`). */
+  textSize: (typeof TEXT_SIZES)[number]
 }
 
 export const ThemeContext = createContext<{
@@ -25,7 +35,7 @@ export const ThemeContext = createContext<{
   toggleTheme: () => void
 }>({
   theme: 'dark',
-  appearance: { theme: 'dark', style: '3d', navStyle: 'default', layout: 'new' },
+  appearance: { theme: 'dark', style: '3d', navStyle: 'default', layout: 'new', font: 'noto-sans', textSize: 'default' },
   setAppearance: () => {},
   toggleTheme: () => {},
 })

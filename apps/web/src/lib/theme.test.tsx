@@ -10,7 +10,7 @@ function Controls() {
     <>
       <output data-testid="theme">{theme}</output>
       <output data-testid="appearance">{JSON.stringify(appearance)}</output>
-      <button type="button" onClick={() => setAppearance({ theme: 'light', style: 'flat', navStyle: 'floating', layout: 'classic' })}>change</button>
+      <button type="button" onClick={() => setAppearance({ theme: 'light', style: 'flat', navStyle: 'floating', layout: 'classic', font: 'literata', textSize: 'large' })}>change</button>
     </>
   )
 }
@@ -22,13 +22,17 @@ afterEach(() => {
   document.documentElement.removeAttribute('data-flat')
   document.documentElement.removeAttribute('data-floating')
   document.documentElement.removeAttribute('data-new-ui')
+  document.documentElement.removeAttribute('data-font')
+  document.documentElement.removeAttribute('data-text-size')
   setCustomTheme(null)
 })
 
 test('a choice is saved and applied to the page', () => {
   const view = render(<ThemeProvider><Controls /></ThemeProvider>)
-  expect(view.getByTestId('appearance').textContent).toBe('{"theme":"dark","style":"3d","navStyle":"default","layout":"new"}')
+  expect(view.getByTestId('appearance').textContent).toBe('{"theme":"dark","style":"3d","navStyle":"default","layout":"new","font":"noto-sans","textSize":"default"}')
   expect(document.documentElement.classList.contains('dark')).toBe(true)
+  expect(document.documentElement.dataset.font).toBe('noto-sans')
+  expect(document.documentElement.dataset.textSize).toBe('default')
 
   fireEvent.click(view.getByRole('button', { name: 'change' }))
 
@@ -37,7 +41,24 @@ test('a choice is saved and applied to the page', () => {
   expect(document.documentElement.hasAttribute('data-flat')).toBe(true)
   expect(document.documentElement.hasAttribute('data-floating')).toBe(true)
   expect(document.documentElement.hasAttribute('data-new-ui')).toBe(false)
+  expect(document.documentElement.dataset.font).toBe('literata')
+  expect(document.documentElement.dataset.textSize).toBe('large')
   expect([localStorage.getItem('theme'), localStorage.getItem('orbit:style'), localStorage.getItem('orbit:nav-style'), localStorage.getItem('orbit:layout')]).toEqual(['light', 'flat', 'floating', 'classic'])
+  expect([localStorage.getItem('orbit:font'), localStorage.getItem('orbit:text-size')]).toEqual(['literata', 'large'])
+})
+
+test('a stored font and text size are read back, and unknown ones fall back to the defaults', () => {
+  localStorage.setItem('orbit:font', 'inter')
+  localStorage.setItem('orbit:text-size', 'compact')
+  const view = render(<ThemeProvider><Controls /></ThemeProvider>)
+  expect(JSON.parse(view.getByTestId('appearance').textContent ?? '')).toMatchObject({ font: 'inter', textSize: 'compact' })
+  view.unmount()
+
+  localStorage.setItem('orbit:font', 'comic-sans')
+  localStorage.setItem('orbit:text-size', 'huge')
+  const fallback = render(<ThemeProvider><Controls /></ThemeProvider>)
+  expect(JSON.parse(fallback.getByTestId('appearance').textContent ?? '')).toMatchObject({ font: 'noto-sans', textSize: 'default' })
+  expect(document.documentElement.dataset.font).toBe('noto-sans')
 })
 
 test('the system theme follows the operating system', () => {

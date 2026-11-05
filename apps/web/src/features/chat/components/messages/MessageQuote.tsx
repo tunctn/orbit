@@ -31,7 +31,7 @@ export function MessageQuote({ message, active }: { message: Message; active: bo
         >
           <UserAvatar user={author} name="?" size={16} />
           <span className="shrink-0 font-medium text-foreground/90">{author?.name ?? 'Unknown'}</span>
-          <span className="truncate text-[13px]">
+          <span className="truncate text-[0.8125rem]">
             <EmojiText text={text || wordlessPreview(quote.sticker === true)} />
           </span>
         </button>
