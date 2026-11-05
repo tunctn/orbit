@@ -23,7 +23,7 @@ function RowMenu() {
 function Sidebar({ hosted, children }: { hosted: boolean; children: ReactNode }) {
   const [slot, setSlot] = useState<HTMLElement | null>(null)
   // the app shell gives the sidebar a slot only in the new UI
-  const newUi = { theme: 'dark', appearance: { theme: 'dark', style: '3d', navStyle: 'default', layout: 'new' }, setAppearance: () => {}, toggleTheme: () => {} } as const
+  const newUi = { theme: 'dark', appearance: { theme: 'dark', style: '3d', navStyle: 'default', layout: 'new', font: 'noto-sans', textSize: 'default' }, setAppearance: () => {}, toggleTheme: () => {} } as const
   return (
     <ThemeContext value={newUi}>
       <SidebarSlotContext value={hosted ? slot : null}>

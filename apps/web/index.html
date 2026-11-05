@@ -26,6 +26,8 @@
       root.toggleAttribute('data-flat', localStorage.getItem('orbit:style') === 'flat')
       root.toggleAttribute('data-floating', localStorage.getItem('orbit:nav-style') === 'floating')
       root.toggleAttribute('data-new-ui', localStorage.getItem('orbit:layout') !== 'classic')
+      root.dataset.font = localStorage.getItem('orbit:font') || 'noto-sans'
+      root.dataset.textSize = localStorage.getItem('orbit:text-size') || 'default'
     </script>
   </head>
   <body>
