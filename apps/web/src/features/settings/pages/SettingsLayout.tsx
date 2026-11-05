@@ -46,7 +46,7 @@ function SettingsShell({ area }: { area: SettingsAreaName }) {
         {/* same left inset as the content column, so the title lines up with the cards */}
         <PaneHeader className="gap-[7px] bg-background pl-5 text-muted-foreground min-[900px]:pl-8 xl:pl-10">
           <Icon className="size-[15px] shrink-0" />
-          <span className="truncate text-[13px] font-semibold">{title}</span>
+          <span className="truncate text-[0.8125rem] font-semibold">{title}</span>
           {page ? (
             <>
               <span aria-hidden>/</span>
@@ -66,7 +66,7 @@ function SettingsShell({ area }: { area: SettingsAreaName }) {
                     <div key={section.label} className="contents">
                       <div
                         className={cn(
-                          'col-span-full px-2.5 py-1 text-[11px] font-medium text-sidebar-foreground/60 select-none max-xl:hidden',
+                          'col-span-full px-2.5 py-1 text-[0.6875rem] font-medium text-sidebar-foreground/60 select-none max-xl:hidden',
                           index > 0 && 'xl:mt-5 xl:border-t xl:pt-4',
                         )}
                       >
@@ -78,7 +78,7 @@ function SettingsShell({ area }: { area: SettingsAreaName }) {
                           to={item.to}
                           end={item.end}
                           // NavLink marks the current page with aria-current
-                          className={cn(buttonVariants({ variant: 'ghost' }), 'w-full min-w-0 justify-start gap-2.5 text-[13px] aria-[current=page]:bg-sidebar-accent aria-[current=page]:text-sidebar-accent-foreground')}
+                          className={cn(buttonVariants({ variant: 'ghost' }), 'w-full min-w-0 justify-start gap-2.5 text-[0.8125rem] aria-[current=page]:bg-sidebar-accent aria-[current=page]:text-sidebar-accent-foreground')}
                         >
                           <item.icon className="size-4.5 opacity-90" />
                           <span className="min-w-0 flex-1 truncate">{item.label}</span>

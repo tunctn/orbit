@@ -21,7 +21,7 @@ interface MessageBylineProps {
 export function MessageByline({ message, members, children, profile = false }: MessageBylineProps) {
   const author = members.find((member) => member.id === message.authorId)
   return (
-    <span data-slot="message-byline" className="flex min-w-0 items-center gap-1.5 text-[13px]">
+    <span data-slot="message-byline" className="flex min-w-0 items-center gap-1.5 text-[0.8125rem]">
       <ProfileTrigger userId={profile ? author?.id : null} name={author?.name ?? 'Unknown'} kind="avatar" tabIndex={-1} className="flex shrink-0">
         <UserAvatar user={author} name="?" size={20} />
       </ProfileTrigger>

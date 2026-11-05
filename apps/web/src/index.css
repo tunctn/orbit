@@ -252,7 +252,7 @@
     }
   }
   body {
-    @apply overflow-hidden bg-background text-[14px] leading-[1.45] text-foreground antialiased [text-rendering:optimizeLegibility];
+    @apply overflow-hidden bg-background text-[0.875rem] leading-[1.45] text-foreground antialiased [text-rendering:optimizeLegibility];
   }
 
   h1,
@@ -262,13 +262,13 @@
     @apply font-semibold text-foreground;
   }
   h1 {
-    @apply text-[24px] leading-7 tracking-[-0.025em];
+    @apply text-[1.5rem] leading-7 tracking-[-0.025em];
   }
   h2 {
-    @apply text-[18px];
+    @apply text-[1.125rem];
   }
   h3 {
-    @apply text-[15px];
+    @apply text-[0.9375rem];
   }
 
   /* bare <button>s (shadcn Button sets its own): keep the old reset */
